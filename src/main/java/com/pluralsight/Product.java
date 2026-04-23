@@ -22,4 +22,8 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
+    public String toString() {
+        return "ID" + this.id + " -Name: " + this.name + " - Price: " + this.price;
+    }
 }

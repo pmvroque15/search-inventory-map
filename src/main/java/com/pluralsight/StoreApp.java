@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -12,7 +13,26 @@ public class StoreApp {
 
     static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        HashMap<Integer, Product> inventoryMap = generateInventoryMap("src/main/resources/inventory.csv");
 
+        System.out.println("What is the ID # of the product: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        Product findProductById = inventoryMap.get(id);
+        System.out.println(findProductById);
+    }
+
+    static HashMap<Integer, Product> generateInventoryMap(String fileName) {
+        HashMap<Integer, Product> idNumberMap = new HashMap<>();
+        ArrayList<Product> inventory = generateInventory(fileName);
+
+        for(Product p: inventory) {
+            int idNumber = p.getId();
+
+            idNumberMap.put(idNumber, p);
+        }
+
+        return idNumberMap;
     }
 
     static ArrayList<Product> generateInventory(String fileName) {
